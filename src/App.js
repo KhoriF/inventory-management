@@ -1,40 +1,67 @@
 import "./App.css";
 import Info from "./Info.js";
 import {PropTypes} from "prop-types";
+import {useState} from "react";
 
 function App() {
   return (
     <div className="App">
       <Info title="Test"></Info>
-      <AddItem text="Khori" number={2}></AddItem>
-      <AddItem text="Jummy"></AddItem>
+      <ButtonState></ButtonState>
     </div>
   );
 }
 
-// Making AddItem component
-function AddItem(props) {
-  // Props are essentially parameters that can be used for functions
-  // You can destructure props by putting them directly in the function parentheses
-  const value = props.text;
+// Component will be re-rendered from state
+function ButtonState() {
+
+  // Initialize state variables and functions to update the states
+  const [title, setTitle] = useState("");
+  const [count, setCount] = useState(0);
+
+  const updateTitleClicked = () => {
+    setTitle("New");
+  }
+
+  const updateCounterClicked = () => {
+      setCount(count + 1);
+  }
+
+  const resetCounter = () => {
+    setCount(0);
+  }
+
   return (
-    <form>
-      <label for="text-form">Type something: </label>
-      <input type="text" value={value} id="text-form" />
-    </form>
+    <div>
+    {/* State used as a prop*/}
+    <Data title={title} count={count}></Data>
+    <button onClick={updateTitleClicked}>Update Title</button>
+    <button onClick={updateCounterClicked}>Update Counter</button>
+    <button onClick={resetCounter}>Reset Counter</button>
+    </div>
+  )
+}
+
+function Data(props) {
+  return (
+    <div>
+      <p>Title: {props.title}</p>
+      <p>Count: {props.count}</p>
+    </div>
   );
 }
 
-AddItem.defaultProps = {
-  number: 7,
-  text: "default",
-};
 
-// Prop types are used to enforce the the correct typing for props
-AddItem.propTypes = {
-  number: PropTypes.number,
-  text: PropTypes.string
-}
+// AddItem.defaultProps = {
+//   number: 7,
+//   text: "default",
+// };
+
+// // Prop types are used to enforce the the correct typing for props
+// AddItem.propTypes = {
+//   number: PropTypes.number,
+//   text: PropTypes.string
+// }
 
 
 
