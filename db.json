@@ -1,27 +1,6 @@
 {
   "items": [
     {
-      "id": "bbd8",
-      "name": "Khori",
-      "price": "323.33",
-      "type": "person",
-      "brand": "na"
-    },
-    {
-      "id": "2270",
-      "name": "Kim",
-      "price": "4.232",
-      "type": "good",
-      "brand": "naa"
-    },
-    {
-      "id": "8507",
-      "name": "Khori ",
-      "price": "3.33",
-      "type": "Cool guy",
-      "brand": "person"
-    },
-    {
       "id": "4f92",
       "name": "Khori",
       "price": "3.22",
@@ -34,6 +13,13 @@
       "price": "3.33",
       "type": "PERONS",
       "brand": "idk"
+    },
+    {
+      "id": "6ddf",
+      "name": "Damien",
+      "price": "43.22",
+      "type": "Brooding",
+      "brand": "na"
     }
   ]
 }

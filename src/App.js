@@ -2,15 +2,34 @@ import "./App.css";
 import SearchBar from "./SearchBar";
 import AddItem from "./AddItem";
 import ItemsDisplay from "./ItemsDisplay";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [filters, setFilters] = useState({});
   const [data, setData] = useState({ items: [] });
 
+
+  useEffect(() => {
+    fetch("http://localhost:3000/items").then((response) => response.json()).then((data) => setData({items: data}));
+  }, []);
+
   const updateFilters = (searchParams) => {
     setFilters(searchParams);
   };
+
+  const deleteItem = (item) => {
+    const items = data["items"];
+    const requestOptions = {
+      method: "DELETE"
+    }
+    fetch(`http://localhost:3000/items/${item.id}`,requestOptions).then((response) => {
+      if (response.ok) {
+        const idx = items.indexOf(item);
+        items.splice(idx, 1);
+        setData({items: items});
+      }
+    })
+  }
 
   const addItemToData = (item) => {
     // Storing state in currentData
@@ -67,12 +86,13 @@ function App() {
         <SearchBar updateSearchParams={updateFilters}></SearchBar>
       </div>
       <div className="row mt-3">
-        <ItemsDisplay items={filterData(data["items"])}></ItemsDisplay>
+        <ItemsDisplay deleteItem={deleteItem} items={filterData(data["items"])}></ItemsDisplay>
       </div>
       <div className="row mt-3">
         <AddItem addItem={addItemToData}></AddItem>
       </div>
     </div>
+
   );
 }
 
